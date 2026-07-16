@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
+import 'dotenv/config';
 const app = express();
 
 app.post("/api/v1/signup", (res, req) => {
@@ -31,3 +32,5 @@ app.get("/api/v1/brain/shareLink", (res, req) =>{
 
 })
 
+
+mongoose.connect(process.env.MONGO_URL as string)
