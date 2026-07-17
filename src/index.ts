@@ -6,6 +6,7 @@ import {z} from "zod";
 import bcrypt from "bcrypt";
 import {userModel} from "./db.js"
 import type {Request, Response} from "express";
+const JWT_SECRET = "abc123";
 const app = express();
 app.use(express.json());
 
@@ -64,9 +65,53 @@ app.post("/api/v1/signup", async (req: Request, res: Response) => {
      
 })
 
-app.post("/api/v1/signin", (req: Request, res: Response) => {
+app.post("/api/v1/signin", async (req: Request, res: Response) => {
+    const {username, password} = req.body;
+
+    const user = await userModel.findOne({
+        username: username
+    })
+
+    if(!user)
+    {
+        res.status(403).json({
+            msg: "username does not exist in DB"
+        })
+        return;
+    }
+
+    try{
+            const passwordMatch = await bcrypt.compare(password, user.password);
+
+            if(passwordMatch) 
+            {
+                const token = jwt.sign({
+                    id: user._id
+                }, JWT_SECRET)
+
+                res.json({
+                    token: token,
+                    msg: "signed in assigned a token"
+                })
+            }
+        }
+        catch(e: any)
+        {
+            if(e.code == 403)
+            {
+                res.status(403).json({
+                    msg: "password doesn't match"
+                })
+            }
+            else{
+                res.status(500).json({
+                    msg:"internal server error"
+                })
+            }
+        }
+    }
     
-})
+)
 
 app.post("/api/v1/content", (req: Request, res: Response) => {
     
@@ -88,5 +133,19 @@ app.get("/api/v1/brain/shareLink", (req, res) =>{
 
 })
 
+async function main()
+{
+    try{
+    await mongoose.connect(process.env.MONGO_URL as string);
 
-mongoose.connect(process.env.MONGO_URL as string)
+    app.listen(3000, () => {
+        console.log("port running on 3000")
+    })
+    }
+    catch(e: any)
+    {
+    console.log("Error in connecting DB", e)
+}
+}
+
+main();
