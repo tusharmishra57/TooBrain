@@ -1,32 +1,24 @@
-import { PlusIcon } from "../icons/PlusIcon";
+import type { ReactElement } from "react"
 
-interface ButtonProps {
-    variant: "primary" | "secondary";
-    size: "sm" | "md" | "lg";
-    text: string;
-    startIcon?: any;
-    endIcon?: any;
-    onClick: ()=>void;
+interface ButtonInterface {
+    variant: "primary" | "secondary" ,
+    startIcon ?: ReactElement,
+    endIcon ?: ReactElement,
+    text: string
 }
 
-const variantStyles = {
-    "primary" : "bg-purple-600 text-white",
-    "secondary": "bg-purple-300 text-purple-600"
+const ButtonVariant = {
+    "primary": "bg-purple-600 text-white",
+    "secondary": "bg-purple-200 text-purple-600"
 }
 
-const sizeStyles = {
-    "sm" : "py-1 px-2",
-    "md": "py-2 px-4",
-    "lg": "py-4 px-4"
-}
+const defaultStyle = "rounded-lg px-4 py-2 flex items-center"
 
-const defaultStyles = "rounded-md flex"
-
-export const Button = (props: ButtonProps) =>{
-    return <div>
-        <button className={`${variantStyles[props.variant]} ${defaultStyles} ${sizeStyles[props.size]}`}>{props.startIcon ? <div className="pr-2">{props.startIcon}</div>: null} 
-        {props.text} 
-        {props.endIcon}
+export const Button = (props: ButtonInterface) =>{
+    return <button className={`${ButtonVariant[props.variant]} ${defaultStyle}`}>
+        <div className="pr-2">
+            {props.startIcon}
+        </div>
+        {props.text}
         </button>
-    </div>
 }
