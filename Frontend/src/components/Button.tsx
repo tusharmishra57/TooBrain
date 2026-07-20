@@ -5,6 +5,7 @@ interface ButtonInterface {
     startIcon ?: ReactElement,
     endIcon ?: ReactElement,
     text: string
+    onClick ?: () => void
 }
 
 const ButtonVariant = {
