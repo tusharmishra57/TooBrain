@@ -1,7 +1,7 @@
 import { CrossIcon } from "../icons/crossIcon"
 import { Button } from "./Button"
 
-export const AddContentModal = ({open, onClose})=>{
+export const AddContentModal = ({open, onClose}: {open: boolean, onClose:()=>void })=>{
 
     return <div>
         {open && (<div className="top-0 left-0 fixed bg-gray-900 opacity-70 w-screen h-screen flex justify-center items-center">
@@ -22,7 +22,7 @@ export const AddContentModal = ({open, onClose})=>{
     </div>
 }
 
-const InputComponent = ({placeholder} ) =>{
+const InputComponent = ({placeholder}:{placeholder:string} ) =>{
     return <div>
         <input type="text" placeholder={placeholder} className="px-2 py-2 border m-2"></input>
     </div>

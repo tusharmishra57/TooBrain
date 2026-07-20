@@ -1,7 +1,7 @@
 import { Logo } from "../icons/Logo"
 import { TextIcon } from "../icons/TextIcon"
 import { TwitterIcon } from "../icons/TwitterIcon"
-import { YoutubeIcon } from "../icons/youtubeIcon"
+import { YoutubeIcon } from "../icons/YoutubeIcon"
 import { SideBarItem } from "./SideBarItem"
 import logo from "../icons/logo.png"
 
