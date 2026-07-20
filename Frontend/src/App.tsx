@@ -16,7 +16,7 @@ function App() {
 
     <div className="flex justify-end">
       <div className= "p-3">
-        <Button variant="primary" text="Add content" startIcon={<PlusIcon/>} onClick={setModal(true)}></Button>
+        <Button variant="primary" text="Add content" startIcon={<PlusIcon/>} onClick={() => {setModal(true)}}></Button>
       </div>
       <div className= "p-3">
         <Button variant="secondary" text="Share Brain" startIcon={<ShareIcon/>}></Button>

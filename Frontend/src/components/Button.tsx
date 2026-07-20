@@ -16,7 +16,7 @@ const ButtonVariant = {
 const defaultStyle = "rounded-lg px-4 py-2 flex items-center"
 
 export const Button = (props: ButtonInterface) =>{
-    return <button className={`${ButtonVariant[props.variant]} ${defaultStyle}`}>
+    return <button className={`${ButtonVariant[props.variant]} ${defaultStyle} cursor-pointer`}  onClick={props.onClick}>
         <div className="pr-2">
             {props.startIcon}
         </div>
