@@ -15,10 +15,14 @@ const contentSchema = new Schema({
 })
 
 const tagsSchema = new Schema({
-
+    title: {type: String}
 })
 
-export const userModel = mongoose.model("user", userSchema);
+const linkSchema = new Schema({
+    hash: {type: String},
+    userId: {type: mongoose.Schema.Types.ObjectId, ref: 'user', required: 'true'}
+})
 
+export const userModel = mongoose.model("user", userSchema)
 
 
